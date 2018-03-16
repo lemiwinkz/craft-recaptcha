@@ -1,0 +1,18 @@
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: 'Sitekey',
+    instructions: 'Enter the sitekey here',
+    id: 'siteKey',
+    name: 'siteKey',
+    value: settings['siteKey']})
+}}
+
+{{ forms.textField({
+    label: 'Secret key',
+    instructions: 'Enter the secret key here',
+    id: 'secretKey',
+    name: 'secretKey',
+    value: settings['secretKey']})
+}}

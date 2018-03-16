@@ -1,14 +1,44 @@
 {
-    "name": "aberkie/craft-recaptcha",
-    "description": "Google reCAPTCHA for Craft CMS",
+    "name": "aberkie/recaptcha",
+    "description": "Craft3  plugin to dispaly Google's new reCaptcha form widget and validate responses.",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "recaptcha"
+    ],
+    "support": {
+        "docs": "https://github.com/https://github.com/aberkie/craft-recaptcha/recaptcha/blob/master/README.md",
+        "issues": "https://github.com/https://github.com/aberkie/craft-recaptcha/recaptcha/issues"
+    },
+    "license": "MIT",
     "authors": [
         {
             "name": "Aaron Berkowitz",
             "homepage": "https://github.com/aberkie"
         }
     ],
-    "type": "craft-plugin",
     "require": {
-        "composer/installers": "~1.0"
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "aberkie\\recaptcha\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Recaptcha",
+        "handle": "recaptcha",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/https://github.com/aberkie/craft-recaptcha/recaptcha/master/CHANGELOG.md",
+        "components": {
+            "render": "aberkie\\recaptcha\\services\\Render",
+            "verify": "aberkie\\recaptcha\\services\\Verify"
+        },
+        "class": "aberkie\\recaptcha\\Recaptcha"
     }
 }
