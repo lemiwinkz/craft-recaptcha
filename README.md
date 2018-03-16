@@ -1,43 +1,36 @@
-# Recaptcha plugin for Craft CMS 3.x
+# Google reCAPTCHA for Craft CMS
+Craft plugin to dispaly Google's new reCaptcha form widget and validate responses.
 
-Craft3  plugin to dispaly Google's new reCaptcha form widget and validate responses.
+## Install
+1. Upload entire recaptcha directory to `craft/plugins` on your server.
+2. Navigate to your site's Plugin settings from the Control Panel.
+3. Click Install
+4. Click on the 'reCAPTCHA for Craft' link to enter in your reCAPTCHA site key and secret key. You can get both keys from the [Google reCaptcha console](http://www.google.com/recaptcha/intro/index.html).
 
-![Screenshot](resources/img/plugin-logo.png)
+## Usage
+### Templates
+To display a reCAPTCHA widget in any template, use `{{craft.recaptcha.render()}}`.
 
-## Requirements
+### User Registration Form
+To use the Recaptcha in a front-end [User Registration](https://craftcms.com/docs/templating/user-registration-form) form, simply do this:
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+    <form method="post" accept-charset="UTF-8" >
+        {{ getCsrfInput() }}
+        <input type="hidden" name="action" value="recaptcha/service/saveUser">
 
-## Installation
+...and assuming it passes Recaptcha validation, the user registration will be passed along to `users/saveUser`
 
-To install the plugin, follow these instructions.
+### Verification
+To verify a user's input, call the plugin's verify service from your own plugin:
 
-1. Open your terminal and go to your Craft project:
+    $captcha = craft()->request->getPost('g-recaptcha-response');
+    $verified = craft()->recaptcha_verify->verify($captcha);
+    if($verified)
+    {
+        //User is a person, not a robot. Go on and process the form!
+    } else {
+        //Uh oh...its a robot. Don't process this form!
+    }
 
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require https://github.com/aberkie/craft-recaptcha/recaptcha
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Recaptcha.
-
-## Recaptcha Overview
-
--Insert text here-
-
-## Configuring Recaptcha
-
--Insert text here-
-
-## Using Recaptcha
-
--Insert text here-
-
-## Recaptcha Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
-
-Brought to you by [Aaron Berkowitz](https://github.com/aberkie)
+## Roadmap
+Currently this only supports the standard reCAPTCHA widget, but I hope to add some capabilities to adjust the styling and functionality.
