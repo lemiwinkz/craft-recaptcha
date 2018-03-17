@@ -2,7 +2,8 @@
 Craft plugin to dispaly Google's new reCaptcha form widget and validate responses.
 
 ## Install
-// TODO: 
+// TODO: Craft plugin store and packagist
+
 
 ## Usage
 ### Templates
