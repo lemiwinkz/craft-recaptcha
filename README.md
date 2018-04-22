@@ -3,25 +3,28 @@ Craft plugin to dispaly Google's new reCaptcha form widget and validate response
 
 ## Install
 // TODO: Craft plugin store and packagist
+// TODO: Determine license
 
 
 ## Usage
 ### Templates
 To display a reCAPTCHA widget in any template, use `{{craft.recaptcha.render()}}`.
 
+IMPORTANT: The JS file is loaded through crafts asset bundle. At the end of your template you will need to put `{{{{ endBody() }} }}`
+
 ### User Registration Form
 To use the Recaptcha in a front-end [User Registration](TODO:) form, simply do this:
 
     <form method="post" accept-charset="UTF-8" >
-        {{ getCsrfInput() }}
-        <input type="hidden" name="action" value="recaptcha/service/saveUser">
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="recaptcha/service/save-user">
 
-...and assuming it passes Recaptcha validation, the user registration will be passed along to `users/saveUser`
+...and assuming it passes Recaptcha validation, the user registration will be passed along to `users/save-user`
 
 ### Verification
 To verify a user's input, call the plugin's verify service from your own plugin:
 
-    $captcha = craft()->request->getPost('g-recaptcha-response');
+    $captcha = Craft::$app->request->post('g-recaptcha-response');
     $verified = Recaptcha::$plugin->verify->verify($captcha);
     if($verified)
     {
