@@ -31,15 +31,16 @@ class RecaptchaAsset extends AssetBundle
      */
     public function init()
     {
+        // Leave this here for future reference.
         $this->sourcePath = "@aberkie/recaptcha/assetbundles/recaptcha/dist";
 
         $this->depends = [
             CpAsset::class,
         ];
 
-
+        // Register the Google recaptcha JS URL
         $this->js = [
-            'js/Recaptcha.js',
+            'https://www.google.com/recaptcha/api.js',
         ];
 
 
