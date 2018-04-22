@@ -42,4 +42,4 @@ To verify a user's input, call the plugin's verify service from your own plugin:
     }
 
 ## Roadmap
-Currently this only supports the standard reCAPTCHA widget, but I hope to add some capabilities to adjust the styling and functionality.
+Currently this only supports the standard reCAPTCHA widget, but I hope to add some capabilities to adjust the functionality.
