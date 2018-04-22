@@ -20,7 +20,6 @@ class Verify extends Component
     // Public Methods
     // =========================================================================
 
-    // TODO : VERIFY SERVICE
 
     public function verify($data) : bool
     {
@@ -30,22 +29,22 @@ class Verify extends Component
 
         // Setup guzzle
         $client = new Client();
-        $response = $client->post($base, [
-                'secret' =>  $settings->secretKey,
-                'response' => $data
-        ]);
 
-        // Error handling and return'ing
-        if($response->getStatusCode() == 200) {
-            $jsonReturn = json_decode($response->getBody(), true);
-            if ($jsonReturn['success']) {
-                die('hey');
-                return true;
-            }
-            die(print_r($jsonReturn));
+        // Off we go.
+        $response = $client->request('POST', $base, [
+            'query' => [
+                'secret' => $settings->secretKey,
+                'response' => $data
+            ]]);
+
+        $jsonReturn = json_decode($response->getBody(), true);
+
+        // Did the request go correctly?
+        if($response->getStatusCode() == 200 && $jsonReturn['success']) {
+            return true;
         }
 
-        die('24');
+        // There isnt a 200 or the json wasnt succesfull.
         return false;
 
     }

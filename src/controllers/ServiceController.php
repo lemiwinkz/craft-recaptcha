@@ -13,8 +13,11 @@ namespace aberkie\recaptcha\controllers;
 use aberkie\recaptcha\Recaptcha;
 
 use Craft;
+use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use craft\elements\User;
+use yii\helpers\Url;
+
 
 class ServiceController extends Controller
 {
@@ -24,15 +27,27 @@ class ServiceController extends Controller
     // Public Methods
     // =========================================================================
 
-    // TODO : PORT C2 Controller to here
 
     public function actionSaveUser(){
         $this->requirePostRequest();
         $captcha = Craft::$app->request->post('g-recaptcha-response');
         $verified = Recaptcha::$plugin->verify->verify($captcha);
-die('22');
+
         if($verified){
+            Craft::$app->runAction('users/save-user');
         }
-            new User();
+        else{
+            $user = new User();
+            $user->addError('recaptcha', Craft::t('recaptcha', 'Failed recaptcha validation. '));
+
+            $user->username = Craft::$app->request->post('username');
+            $user->email = Craft::$app->request->post('email');
+
+            Craft::$app->urlManager->setRouteParams([
+                'account' => $user,
+            ]);
+
+        }
+
     }
 }

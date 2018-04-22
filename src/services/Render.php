@@ -10,6 +10,7 @@
 
 namespace aberkie\recaptcha\services;
 
+use aberkie\recaptcha\assetbundles\Recaptcha\RecaptchaAsset;
 use aberkie\recaptcha\Recaptcha;
 
 use Craft;
@@ -32,14 +33,16 @@ class Render extends Component
             'siteKey' => $settings->siteKey,
         ];
 
-        // Render the frontend template
+        // Register the JS File
+        Craft::$app->view->registerAssetBundle(RecaptchaAsset::class);
 
+        // Render the template.
         $standardMode = Craft::$app->view->getTemplateMode();
         Craft::$app->view->setTemplateMode(view::TEMPLATE_MODE_CP);
         $html = Craft::$app->view->renderTemplate('recaptcha/frontend/recaptcha', $templateVariables);
         Craft::$app->view->setTemplateMode($standardMode);
-        Craft::$app->view->registerJsFile('https://www.google.com/recaptcha/api.js');
 
+        // Send it out
         echo $html;
     }
 }
