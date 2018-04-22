@@ -23,14 +23,16 @@ class Render extends Component
     /**
      * @return mixed
      */
-    public function render()
-    {
+    public function render($theme = 'light', $size = 'normal'){
+
         $settings = Recaptcha::$plugin->getSettings();
 
         // Setup the variables
         $templateVariables = [
             'id' => 'gRecaptchaContainer',
             'siteKey' => $settings->siteKey,
+            'theme' => $theme,
+            'size' => $size
         ];
 
         // Register the JS File

@@ -17,8 +17,8 @@ use Craft;
 class RecaptchaVariable
 {
 
-    public function render($params = null)
+    public function render($theme = null, $size = null)
     {
-        return Recaptcha::$plugin->render->render($params);
+        return Recaptcha::$plugin->render->render($theme, $size);
     }
 }
