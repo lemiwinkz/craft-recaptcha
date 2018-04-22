@@ -16,7 +16,7 @@ IMPORTANT: The JS file is loaded through crafts asset bundle. At the end of your
 
 When rendering the reCAPTCHA using the above twig function you can enter two twig params that determine the size of the reCAPTCHA and the color. If you dont enter anything it will default to normal size with a white background. If you want a small reCAPTCHA with a black background do this: 
 
-    `{{craft.recaptcha.render('dark', 'compact')}}`
+    {{craft.recaptcha.render('dark', 'compact')}}
 
 Read https://developers.google.com/recaptcha/docs/display#render_param for all the styling options. 
 
